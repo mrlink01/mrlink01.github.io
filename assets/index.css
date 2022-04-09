@@ -1,0 +1,27 @@
+header, footer {
+    height: 100px;
+    background-color: grey;
+}
+main {
+    height: 50vh;
+}
+
+.scene1 {
+    background-color: aqua;
+}
+
+.scene2 {
+    background-color: yellow;
+}
+
+.scene3 {
+    background-color: blue;
+}
+
+.scene4 {
+    background-color: purple;
+}
+
+.scene5 {
+    background-color: brown;
+}
