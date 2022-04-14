@@ -5,16 +5,17 @@ const init = () => {
     const player = new MainCharacter($('#player'), '80%', 0);
     const scoreCounter = new ScoreCounter($('#score'), $('#stoneCounter'));
 
+    const jumpHeight = $('#jumpHeight').val();
     const startStones = $('#startScore').val();
 
     scoreCounter.stones = startStones;
 
     // Clicking the scene jumps
-    theScene._$scene.click(_ => { player.jump() });
+    theScene._$scene.click(_ => { player.jump(jumpHeight) });
     $(window).keyup((e) => {
         // Space can jump as well
         if(e.keyCode == 32){
-            player.jump();
+            player.jump(jumpHeight);
         }
      });
 
@@ -229,7 +230,7 @@ class MainCharacter extends Character {
         super($elem, x, y);
     }
 
-    jump(maxheight=340) {
+    jump(maxheight=420) {
         if (Boolean(this.#jumpTimer)) return;
         let incAmnt = 2;
         let cnt = 0;
