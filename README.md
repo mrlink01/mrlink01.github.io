@@ -1,7 +1,7 @@
 # Race to the Snap: VPA 103 Final
 
 ## Description
-This game is my final creative project for VPA103-09: Marvel Cinematic Universe. This is a Marvel Themed dinosaur based game where the objective is to help Thanos obtain all 6 infinity stones. You start out with one as Thanos did in Infinity War, and collect another every ten seconds. After six are collected, you can snap to end the game.
+This game is my final creative project for VPA103-09: Marvel Cinematic Universe. This is a Marvel themed dinosaur-based game where the objective is to help Thanos obtain all 6 infinity stones. You start out with one as Thanos did in Infinity War, and collect another every ten seconds. After six are collected, you can snap to end the game.
 
 ## How to play
 
