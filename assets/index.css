@@ -1,7 +1,37 @@
-header, footer {
-    height: 100px;
-    background-color: grey;
+* {
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
+
+.container-fluid {
+    padding: 0;
+}
+
+header, footer {
+    background-color: #363636;
+}
+
+.option-list {
+    list-style: none;
+}
+
+.options {
+    color: white;
+    text-decoration: none;
+}
+
+.options:hover {
+    width: fit-content;
+    cursor: pointer;
+}
+
+header {
+    height: 10vh;
+}
+
+footer {
+    height: 40vh;
+}
+
 main {
     height: 50vh;
     position: relative;
@@ -9,7 +39,7 @@ main {
 
 #player {
     height: 100px;
-    background-image: url('./images/ezgif.com-gif-maker.gif');
+    background-image: url('./images/thanos.gif');
     background-size: contain;
     background-repeat: no-repeat;
     width: 80px
@@ -20,29 +50,42 @@ main {
     position: absolute;
 }
 
-.test {
-    height: 50px;
-    width: 50px;
+.obs {
+    height: 80px;
+    width: 80px;
     right: 0;
-    background-color: green;
+    background-color: transparent;
 }
 
-.scene1 {
-    background-color: aqua;
+.header-txt {
+    font-size: 20px;
+    color: white;
 }
 
-.scene2 {
-    background-color: yellow;
+.cap {
+    background-image: url('./images/cap.png');
+    background-size: contain;
+    background-repeat: no-repeat;
 }
 
-.scene3 {
-    background-color: blue;
+.thor {
+    background-image: url('./images/thor.png');
+    background-size: contain;
+    background-repeat: no-repeat;
 }
 
-.scene4 {
-    background-color: purple;
+.star {
+    background-image: url('./images/starlord.png');
+    background-size: contain;
+    background-repeat: no-repeat;
 }
 
-.scene5 {
-    background-color: brown;
+.gam {
+    background-image: url('./images/gam.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.scene {
+    background-color: #e8e8e8;
 }

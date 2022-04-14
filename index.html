@@ -7,17 +7,130 @@
         <link rel="stylesheet" href="./assets/index.css">
     </head>
     <body>
-        <header>
-            <div id="score">0</div>
+        <noscript>JavaScript is required</noscript>
+        <header class="row">
+            <h1 id="score" class="col-md-4 text-center header-txt">0</div>
+            <h1 id="header" class="col-md-4 text-center header-txt"><span>Race to the Snap</span></div>
+            <h1 id="stoneCounter" class="col-md-4 text-center header-txt">Stones: 1/6</h1>
         </header>
         <main id="main" class="scene1">
             <div id="player" class="character"></div>
         </main>
-        <footer>
+        <footer class="row">
+            <div class="col-2"></div>
+            <div class="col-8">
+                <ul class="p-3 option-list">
+                    <li class="options mb-3" data-bs-toggle="modal" data-bs-target="#rules">
+                        How to play
+                    </li>
+                    <li class="options mb-3" data-bs-toggle="modal" data-bs-target="#req">
+                        Requirements
+                    </li>
+                    <li class="options mb-3" data-bs-toggle="modal" data-bs-target="#set">
+                        Settings
+                    </li>
+                    <li class="options mb-3" onclick="window.location.reload()">
+                        Restart
+                    </li>
+                </ul>
+            </div>
         </footer>
+        <!-- Modals -->
+        <div class="modal fade" id="rules" tabindex="-1" aria-labelledby="rulesLabel" aria-hidden="true">
+            <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h5 class="modal-title" id="rulesLabel">How to play</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                <ol>
+                    <li>Click the white scene to start</li>
+                    <li>Press space or click the white scene to jump, hurdle the Avengers!</li>
+                    <li>Every 10 seconds earns an infinity stone! Collect six to snap!</li>
+                    <li>Snap to win the game!</li>
+                </ol>
+                </div>
+                <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+            </div>
+        </div>
+        <div class="modal fade" id="req" tabindex="-1" aria-labelledby="reqLabel" aria-hidden="true">
+            <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h5 class="modal-title" id="reqLabel">Requirements</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                <ul>
+                    <li>Internet access is required</li>
+                    <li>The latest version of chrome or firefox is required</li>
+                </ul>
+                </div>
+                <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+            </div>
+        </div>
+        <div class="modal fade" id="set" tabindex="-1" aria-labelledby="setLabel" aria-hidden="true">
+            <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h5 class="modal-title" id="setLabel">Settings</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <label for="score">Starting Stones:</label>
+                    <input id="startScore" type="number" id="score" name="quantity" min="1" max="5" value="1">
+                </div>
+                <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+            </div>
+        </div>
+        <div class="modal fade" id="lose" tabindex="-1" aria-labelledby="loseLabel" aria-hidden="true">
+            <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h5 class="modal-title" id="loseLabel">You lose!</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  You were not inevitable!
+                </div>
+                <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" onclick="window.location.reload()">Restart</button>
+                </div>
+            </div>
+            </div>
+        </div>
+        <div class="modal fade" id="win" tabindex="-1" aria-labelledby="winLabel" aria-hidden="true">
+            <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h5 class="modal-title" id="loseLabel">You win!</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  You were inevitable! Snap to end the battle!
+                </div>
+                <div class="modal-footer">
+                <button id="snap" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Snap</button>
+                </div>
+            </div>
+            </div>
+        </div>
     </body>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> 
+     <!-- Latest compiled and minified CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script> 
     <script src="./index.js"></script> 
 </html>

@@ -1,19 +1,18 @@
 'use strict';
 
 const init = () => {
-    
-    // Load an array with each scene
-    const scenes = [...Array(5).keys()].map((elem) => 
-        `scene${++elem}`
-    );
-
     const theScene = new Scene($('#main'));
     const player = new MainCharacter($('#player'), '80%', 0);
-    const scoreCounter = new ScoreCounter($('#score'));
+    const scoreCounter = new ScoreCounter($('#score'), $('#stoneCounter'));
 
+    const startStones = $('#startScore').val();
+
+    scoreCounter.stones = startStones;
+
+    // Clicking the scene jumps
     theScene._$scene.click(_ => { player.jump() });
     $(window).keyup((e) => {
-        
+        // Space can jump as well
         if(e.keyCode == 32){
             player.jump();
         }
@@ -21,8 +20,17 @@ const init = () => {
 
     // Function to create a character adn add it to the scene
     const createCharacter = _ => {
+        const charClasses = [
+            'cap',
+            'thor',
+            'star',
+            'gam',
+        ];
+
+        const curSprite = charClasses[Math.floor(Math.random()*charClasses.length)];
+
         const cur = $('<div>', {
-            class: 'character test',
+            class: `character obs ${curSprite}`,
         });
         
         cur.appendTo('#main');
@@ -40,7 +48,8 @@ const init = () => {
         const overlaps = player.checkCollision(cur);
 
         if (overlaps) {
-            clearInterval(characterTimer);
+            clearAllIntervals();
+            endGame([], $('#lose'));
         }
 
         cur.x = `${++pos}%`;
@@ -56,29 +65,48 @@ const init = () => {
     }, 1 * 100);
 
     const sceneTimer = setInterval(_ => {
-        theScene.swapScene(scenes[indx], scenes[++indx]);
+        scoreCounter.incrementStones();
 
-        if (indx >= scenes.length) {
-            clearInterval(sceneTimer);
-            clearInterval(scoreTimer);
-            theScene.hide();
-        };
+        if (scoreCounter.checkWin()) {
+            clearAllIntervals();
+            $('#win').modal('show');
+        }
     }, 10 * 1000);
+
+    $('#snap').click(_ => {
+        theScene.hide();
+    });
+
+    var clearAllIntervals = _ => {
+        clearInterval(sceneTimer);
+        clearInterval(scoreTimer);
+        clearInterval(characterTimer);
+    }
 };
+
+function endGame(intervals, loseModal) {
+    intervals.forEach(i => {
+        clearInterval(i);
+    });
+
+    loseModal.modal('show');
+}
 
 /**
  * Class to encapsulate the score and score dom element
  */
 class ScoreCounter {
     #score = 0;
+    #stones = 1;
 
     /**
      * Constructor
      * 
      * @param {object} $counter jQuery object for the score counter
      */
-    constructor($counter) {
+    constructor($counter, $stoneCounter) {
         this._$counter = $counter;
+        this._$stoneCounter = $stoneCounter;
     }
 
     set score(score) {
@@ -87,8 +115,26 @@ class ScoreCounter {
         this._$counter.text(this.#score);
     }
 
+    set stones(stones) {
+        this.#stones = stones;
+
+        this._$stoneCounter.text(`Stones: ${this.#stones}/6`);
+    }
+
+    incrementStones() {
+        if (this.#stones >= 6) return;
+
+        this.#stones++;
+
+        this._$stoneCounter.text(`Stones: ${this.#stones}/6`);
+    }
+
     incrementScore(scoreToAdd) {
         this.score = this.#score + scoreToAdd;
+    }
+
+    checkWin() {
+        return this.#stones >= 6;
     }
 }
 
@@ -104,17 +150,6 @@ class Scene {
      */
     constructor($scene) {
         this._$scene = $scene;
-    }
-
-    /**
-     * Swaps scene bacground from one scene to another 
-     * 
-     * @param {string} from Class to swap from
-     * @param {string} to Class to swap to
-     */
-    swapScene(from, to,) {
-        this._$scene.removeClass(from);
-        this._$scene.addClass(to);
     }
 
     /**
@@ -173,7 +208,7 @@ class Character {
         const rect2 = otherCharacter._$elem[0].getBoundingClientRect();
 
         const overlap = !(rect1.right < rect2.left || 
-            rect1.left > rect2.right || 
+            rect1.left  > rect2.right || 
             rect1.bottom < rect2.top || 
             rect1.top > rect2.bottom);
         
@@ -194,9 +229,9 @@ class MainCharacter extends Character {
         super($elem, x, y);
     }
 
-    jump(maxheight=240) {
+    jump(maxheight=340) {
         if (Boolean(this.#jumpTimer)) return;
-
+        let incAmnt = 2;
         let cnt = 0;
         let indx = 0;
         let apex = maxheight / 2; 
@@ -208,14 +243,18 @@ class MainCharacter extends Character {
             } 
             
             if (maxJump) {
-                this.y = --cnt;
+                incAmnt = 1;
+                cnt-=incAmnt;
             } else {
-                this.y = ++cnt;
+                cnt+=incAmnt;
             }
 
-            indx++;
+            this.y = cnt;
+
+            indx+=incAmnt;
 
             if (indx >= maxheight) {
+                this.y = 0;
                 clearInterval(this.#jumpTimer); 
                 this.#jumpTimer = undefined;
             }
@@ -224,4 +263,11 @@ class MainCharacter extends Character {
 
 }
 
-init();
+let started = false;
+
+$('#main').click((e) => {
+    if (started) return; 
+
+    started = true;
+    init();
+});
