@@ -59,7 +59,7 @@ const init = () => {
             pos = 0;
             cur = new Character(createCharacter());
         }
-    }, 1 * 50);
+    }, 1 * 30);
 
     const scoreTimer = setInterval(_ => {
         scoreCounter.incrementScore(1);
