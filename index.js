@@ -5,8 +5,9 @@ const init = () => {
     const player = new MainCharacter($('#player'), '80%', 0);
     const scoreCounter = new ScoreCounter($('#score'), $('#stoneCounter'));
 
-    const jumpHeight = $('#jumpHeight').val();
-    const startStones = $('#startScore').val();
+    const jumpHeight = $('#jumpHeight').val() ?? 420;
+    const startStones = $('#startScore').val() ?? 1;
+    const obsSpeed = $('#obsSpeed').val() ?? 30;
 
     scoreCounter.stones = startStones;
 
@@ -59,7 +60,7 @@ const init = () => {
             pos = 0;
             cur = new Character(createCharacter());
         }
-    }, 1 * 30);
+    }, obsSpeed);
 
     const scoreTimer = setInterval(_ => {
         scoreCounter.incrementScore(1);

@@ -84,6 +84,8 @@ main {
     background-image: url('./images/gam.png');
     background-size: contain;
     background-repeat: no-repeat;
+    height: 50px;
+    width: 50px;
 }
 
 .scene {
