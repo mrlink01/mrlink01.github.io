@@ -4,6 +4,27 @@ header, footer {
 }
 main {
     height: 50vh;
+    position: relative;
+}
+
+#player {
+    height: 100px;
+    background-image: url('./images/ezgif.com-gif-maker.gif');
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 80px
+}
+
+.character {
+    bottom: 0;
+    position: absolute;
+}
+
+.test {
+    height: 50px;
+    width: 50px;
+    right: 0;
+    background-color: green;
 }
 
 .scene1 {
